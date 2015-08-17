@@ -341,15 +341,7 @@ class Cleantalk {
      # @return type
      #
     def isAllowMessage(request)
-        uri = URI 'https://moderate.cleantalk.org/api2.0'
-        connection = Net::HTTP.new uri.host, uri.port
-        http_request = Net::HTTP::Post.new uri
-        form_data = Array.new
-        request.each_index{|elem|form_data.elem = params.at(elem)}
-        form_data{:method_name => 'check_message'}
-        http_request.set_form form_data, 'multipart/form-data'
-        response = connection.request http_request
-        return JSON.parse(response.entity)
+        return httpRequest('check_message',request)
     end
 
     #
@@ -357,13 +349,17 @@ class Cleantalk {
     # @param CleantalkRequest $request
     # @return type
     #
-    def isAllowUser(request)
-        uri = URI 'https://moderate.cleantalk.org/api2.0'
+    def isAllowUser(request)        
+        return httpRequest('check_newuser',request)
+    end
+    
+    def httpRequest(method_name, request)
+    	uri = URI 'https://moderate.cleantalk.org/api2.0'
         connection = Net::HTTP.new uri.host, uri.port
         http_request = Net::HTTP::Post.new uri
         form_data = Array.new
         request.each_index{|elem|form_data.elem = params.at(elem)}
-        form_data{:method_name => 'check_newuser'}
+        form_data{:method_name => method_name}
         http_request.set_form form_data, 'multipart/form-data'
         response = connection.request http_request
         return JSON.parse(response.entity)
