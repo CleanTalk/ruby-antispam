@@ -3,7 +3,7 @@ API to have CleanTalk anti-spam on Ruby
 
 Example of usage:
 
-require 'cleantalk.class.rb'
+`require 'cleantalk.class.rb'
 
 sender_info = Array.new(:cms_lang => 'en_US') #here put locale for your language
 
@@ -22,7 +22,7 @@ result = ct.isAllowMessage(request) # for message checking
 result = ct.isAllowUser(request) # for registration checking
 
 # result.allow contains our decision: 1 for allowed message, 0 for blocked
-# result.comment contains comment for our decision
+# result.comment contains comment for our decision`
 
 
 
