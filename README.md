@@ -3,7 +3,7 @@ API to have CleanTalk anti-spam on Ruby
 
 Example of usage:
 
-`require 'cleantalk.class.rb'
+    `require 'cleantalk.class.rb'
 
 sender_info = Array.new(:cms_lang => 'en_US') #here put locale for your language
 
