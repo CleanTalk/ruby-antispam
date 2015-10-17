@@ -1,7 +1,7 @@
 require 'net/http'
 require 'json'
 
-class CleantalkResponse {
+class CleantalkResponse
 
     #
     # Is stop words
@@ -93,7 +93,7 @@ class CleantalkResponse {
             @errno = obj.errno
             @errstr = obj.errstr
 
-            @errstr = @errstr.gsub(/.+(\*\*\*.+\*\*\*).+/, \1, @errstr)
+            #@errstr = @errstr.gsub(/.+(\*\*\*.+\*\*\*).+/, \1, @errstr)
 
             obj.stop_words.empty ? @stop_words = obj.stop_words : @stop_words = nil
             obj.comment.empty ? @comment = obj.comment : @comment  = nil
@@ -107,16 +107,19 @@ class CleantalkResponse {
             obj.inactive.empty ? @inactive = obj.inactive : @inactive = 0
             obj.account_status.empty ? @account_status = obj.account_status : @account_status = -1
 
-            if (@errno !== 0 && @errstr !== nil && @comment === nil)
+            if (@errno != 0 && @errstr != nil && @comment == nil)
                 @comment = '*** ' + @errstr + ' Antispam service cleantalk.org #**' 
+            end
         end
     end
 end
 
+
  #
  # Request class
  # 
-class CleantalkRequest {
+class CleantalkRequest
+	attr_accessor :all_headers, :last_error_no, :last_error_time, :last_error_text, :message, :example, :auth_key, :agent, :stoplist_check, :response_lang, :sender_ip, :sender_email, :sender_nickname, :sender_info, :post_info, :allow_links, :submit_time, :js_on, :tz, :feedback, :phone
 
      #
      #  All http request headers
@@ -200,7 +203,7 @@ class CleantalkRequest {
 
      #
      # Sender info JSON string
-     # @var string
+     # @var hash
      # 
      @sender_info = nil;
 
@@ -225,14 +228,14 @@ class CleantalkRequest {
 
      #
      # Is enable Java Script,
-     # valid are 0|1|2
+     # valid are 0|1
      # Status:
      #  nil - JS html code not inserted into phpBB templates
      #  0 - JS disabled at the client browser
      #  1 - JS enabled at the client broswer
      # @var int
      # 
-     @js_on = nil;
+     @js_on = 0;
 
      #
      # user time zone
@@ -258,7 +261,7 @@ class CleantalkRequest {
      # @param type $params
      # 
      def initialize(params = nil) 
-        if (params.length>0)
+        if (params!=nil && params.length>0)
             params.each_index{|elem|@elem = params.at(elem)}
         end
     end
@@ -267,7 +270,7 @@ end
  #
  # Cleantalk class create request
  #
-class Cleantalk {
+class Cleantalk
 
      #
      # Debug level
@@ -285,25 +288,25 @@ class Cleantalk {
      # Cleantalk server url
      # @var string
      #
-     @server_url = null;
+     @server_url = nil;
 
      #
      # Last work url
      # @var string
      #
-     @work_url = null;
+     @work_url = nil;
 
      #
      # WOrk url ttl
      # @var int
      #
-     @server_ttl = null;
+     @server_ttl = nil;
 
      #
      # Time wotk_url changer
      # @var int
      #
-     @server_changed = null;
+     @server_changed = nil;
 
      #
      # Flag is change server url
@@ -315,7 +318,7 @@ class Cleantalk {
      # Codepage of the data 
      # @var bool
      #
-     @data_codepage = null;
+     @data_codepage = nil;
     
      #
      # API version to use 
@@ -354,14 +357,19 @@ class Cleantalk {
     end
     
     def httpRequest(method_name, request)
-    	uri = URI 'https://moderate.cleantalk.org/api2.0'
+    	uri = URI 'http://moderate.cleantalk.org/api2.0'
         connection = Net::HTTP.new uri.host, uri.port
         http_request = Net::HTTP::Post.new uri
-        form_data = Array.new
-        request.each_index{|elem|form_data.elem = params.at(elem)}
-        form_data{:method_name => method_name}
-        http_request.set_form form_data, 'multipart/form-data'
-        response = connection.request http_request
+        form_data={}
+        attrs=request.instance_variables
+        attrs.each{|elem|form_data[elem.to_s.sub('@','')] = request.instance_variable_get(elem)}
+        form_data['method_name'] = method_name
+
+		req = Net::HTTP::Post.new(uri, initheader = {'Content-Type' =>'application/json'})
+		req.body = form_data.to_json
+		response = Net::HTTP.start(uri.hostname, uri.port) do |http|
+		  http.request(req)
+		end
         return JSON.parse(response.entity)
     end
 end
