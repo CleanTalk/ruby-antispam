@@ -1,9 +1,16 @@
-# ruby-antispam
+# ruby-cleantalk
+
 API to have CleanTalk anti-spam on Ruby
 
-Example of usage:
+## Install
 
-    require 'cleantalk.class.rb'
+Install via bundler
+
+    gem 'cleantalk'
+
+## Usage
+
+    require 'cleantalk'
 
     sender_info = Array.new(:cms_lang => 'en_US') #here put locale for your language
     
@@ -18,8 +25,8 @@ Example of usage:
     request.sender_info = sender_info
     
     ct = Cleantalk.new
-    result = ct.is_allowed_message?(request) # for message checking
-    result = ct.is_allowed_user?(request) # for registration checking
+    result = ct.is_allowed_message(request) # for message checking
+    result = ct.is_allowed_user(request) # for registration checking
     
     # result.allow contains our decision: 1 for allowed message, 0 for blocked
     # result.comment contains comment for our decision`
