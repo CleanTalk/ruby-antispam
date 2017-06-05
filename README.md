@@ -7,7 +7,7 @@ Example of usage:
 
     sender_info = Array.new(:cms_lang => 'en_US') #here put locale for your language
     
-    request = CleantalkRequest.new
+    request = Cleantalk::Request.new
     request.auth_key = 'your_key'
     request.message = 'test message' #don't use this field for registration check
     request.sender_email = 'stop_email@example.com
@@ -18,11 +18,8 @@ Example of usage:
     request.sender_info = sender_info
     
     ct = Cleantalk.new
-    result = ct.isAllowMessage(request) # for message checking
-    result = ct.isAllowUser(request) # for registration checking
+    result = ct.is_allowed_message?(request) # for message checking
+    result = ct.is_allowed_user?(request) # for registration checking
     
     # result.allow contains our decision: 1 for allowed message, 0 for blocked
     # result.comment contains comment for our decision`
-
-
-

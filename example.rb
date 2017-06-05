@@ -1,7 +1,7 @@
 require './cleantalk.class.rb'
 
 sender_info = {cms_lang:'en_US'} #here put locale for your language
-request = CleantalkRequest.new
+request = Cleantalk::Request.new
 request.auth_key = 'your_key'
 request.message = 'test message' #don't use this field for registration check
 request.sender_email = 'stop_email@example.com'
@@ -12,6 +12,6 @@ request.submit_time = 11 # you should calculate time for submitting form by yous
 request.sender_info = sender_info
 
 ct = Cleantalk.new
-result = ct.isAllowMessage(request) # for message checking
-#result = ct.isAllowUser(request) # for registration checking
+result = ct.is_allowed_message?(request) # for message checking
+#result = ct.is_allowed_user?(request) # for registration checking
 puts result
