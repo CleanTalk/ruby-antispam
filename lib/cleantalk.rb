@@ -39,9 +39,7 @@ class Cleantalk
 
   def http_request(method_name, request)
     uri = URI 'https://moderate.cleantalk.org/api2.0'
-    connection = Net::HTTP.new uri.host, uri.port
-    connection.use_ssl = true
-    http_request = Net::HTTP::Post.new uri
+
     form_data = {}
     attrs = request.instance_variables
     attrs.each {|elem| form_data[elem.to_s.sub('@','')] = request.instance_variable_get(elem) }
@@ -49,7 +47,7 @@ class Cleantalk
 
     req = Net::HTTP::Post.new(uri, {'Content-Type' =>'application/json'})
     req.body = form_data.to_json
-    response = Net::HTTP.start(uri.hostname, uri.port) do |http|
+    response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
       http.request(req)
     end
     return JSON.parse(response.entity)
