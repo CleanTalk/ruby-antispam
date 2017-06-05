@@ -40,6 +40,7 @@ class Cleantalk
   def http_request(method_name, request)
     uri = URI 'https://moderate.cleantalk.org/api2.0'
     connection = Net::HTTP.new uri.host, uri.port
+    connection.use_ssl = true
     http_request = Net::HTTP::Post.new uri
     form_data = {}
     attrs = request.instance_variables
