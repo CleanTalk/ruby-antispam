@@ -16,7 +16,7 @@ describe Cleantalk do
         "allow" => 0
       }
       stub_request(:post, "https://moderate.cleantalk.org:443/api2.0").
-        with(body: "{\"auth_key\":\"your_key\",\"method_name\":\"check_newuser\"}",
+        with(body: "{\"method_name\":\"check_newuser\",\"auth_key\":\"your_key\"}",
              headers: {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Content-Type'=>'application/json', 'Host'=>'moderate.cleantalk.org', 'User-Agent'=>'Ruby'}).
          to_return(status: 200, body: JSON.dump(response), headers: {})
 

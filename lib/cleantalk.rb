@@ -40,10 +40,9 @@ class Cleantalk
   def http_request(method_name, request)
     uri = URI 'https://moderate.cleantalk.org/api2.0'
 
-    form_data = {}
+    form_data = {method_name: method_name}
     attrs = request.instance_variables
     attrs.each {|elem| form_data[elem.to_s.sub('@','')] = request.instance_variable_get(elem) }
-    form_data['method_name'] = method_name
 
     req = Net::HTTP::Post.new(uri, {'Content-Type' =>'application/json'})
     req.body = form_data.to_json
