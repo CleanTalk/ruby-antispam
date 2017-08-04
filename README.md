@@ -17,7 +17,7 @@ require 'cleantalk'
 request = Cleantalk::Request.new
 request.auth_key        = 'your_key'
 request.message         = 'test message' # don't use this field for registration check
-request.sender_email    = 'stop_email@example.com
+request.sender_email    = 'stop_email@example.com'
 request.sender_nickname = 'test nickname'
 request.sender_ip       = '127.0.0.1'
 request.js_on           = 1 # you should check for JavaScript by yourself
