@@ -13,7 +13,7 @@ class Cleantalk::Request
   def initialize(params = nil)
     unless params.nil?
       params.each do |key, value|
-        instance_variable_set("@#{key}", value)
+        send("#{key}=", value)
       end
     end
   end
@@ -21,15 +21,22 @@ class Cleantalk::Request
   # Remote Call
   def http_request
     valid?
-    form_data, attrs = {}, self.instance_variables
-    attrs.each {|elem| form_data[elem.to_s.sub('@','')] = self.instance_variable_get(elem) }
+    form_data = self.instance_variables.inject({}) do |params, var_name|
+      param_key = var_name.to_s.sub('@','')
+      params[param_key] = send(param_key)
+      params
+    end
 
-    req = Net::HTTP::Post.new(API_URI, {'Content-Type' =>'application/json'})
-    req.body = form_data.to_json
+    req = Net::HTTP::Post.new(API_URI, API_HEADERS)
+    req.body = JSON.generate(form_data)
     response = Net::HTTP.start(API_URI.hostname, API_URI.port, use_ssl: true) do |http|
       http.request(req)
     end
     return JSON.parse(response.entity)
+  end
+
+  def auth_key
+    @auth_key || Cleantalk.auth_key
   end
 
   private
@@ -41,5 +48,6 @@ class Cleantalk::Request
   end
 
   API_URI = URI.parse('https://moderate.cleantalk.org/api2.0').freeze
+  API_HEADERS = {'Content-Type' =>'application/json'}.freeze
   class Cleantalk::Request::BadParameters < StandardError; end
 end

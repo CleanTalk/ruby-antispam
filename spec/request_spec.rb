@@ -46,5 +46,18 @@ describe Cleantalk::Request do
         subject.http_request
       end.to raise_error(Cleantalk::Request::BadParameters)
     end
+
+    it "can use global conf auth_key" do
+      response, body = {"ok" => true}, JSON.fast_generate(base_parameters)
+
+      request.auth_key = nil
+      Cleantalk.auth_key = 'test'
+
+      stub_request(:post, "https://moderate.cleantalk.org:443/api2.0").
+        with(body: body, headers: headers).
+        to_return(status: 200, body: JSON.dump(response), headers: {})
+
+      expect(request.http_request).to eql(response)
+    end
   end
 end
