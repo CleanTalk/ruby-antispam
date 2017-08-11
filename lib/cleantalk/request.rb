@@ -18,8 +18,7 @@ class Cleantalk::Request
     end
   end
 
-  # Remote Call
-  def http_request
+  def http_request_without_parse
     valid?
     form_data = self.instance_variables.inject({}) do |params, var_name|
       param_key = var_name.to_s.sub('@','')
@@ -32,7 +31,13 @@ class Cleantalk::Request
     response = Net::HTTP.start(API_URI.hostname, API_URI.port, use_ssl: true) do |http|
       http.request(req)
     end
-    return JSON.parse(response.entity)
+
+    response.entity
+  end
+
+  # Remote Call
+  def http_request
+    JSON.parse http_request_without_parse
   end
 
   def auth_key

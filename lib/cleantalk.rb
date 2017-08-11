@@ -31,3 +31,5 @@ class Cleantalk
 end
 
 require 'cleantalk/request'
+require 'cleantalk/check_newuser'
+require 'cleantalk/check_newuser_result'
