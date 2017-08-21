@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.authors     = [""]
   s.email       = ""
   s.files       = ["lib/cleantalk.rb"]
-  s.homepage    = "https://github.com/guille-moe/ruby-antispam"
+  s.homepage    = "https://github.com/CleanTalk/ruby-antispam"
   s.add_development_dependency 'rspec', '~> 3.6'
   s.add_development_dependency 'webmock', '~> 3.0'
 end
