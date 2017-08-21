@@ -5,9 +5,9 @@ Gem::Specification.new do |s|
   s.summary     = "Talk to cleantalk.org API for antispam"
   s.description = ""
   s.authors     = [""]
-  s.email       = ''
+  s.email       = ""
   s.files       = ["lib/cleantalk.rb"]
-  s.homepage    = 'https://github.com/francois2metz/ruby-antispam'
+  s.homepage    = "https://github.com/CleanTalk/ruby-antispam"
   s.add_development_dependency 'rspec', '~> 3.6'
   s.add_development_dependency 'webmock', '~> 3.0'
 end
