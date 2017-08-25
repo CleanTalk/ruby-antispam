@@ -49,6 +49,10 @@ class Cleantalk::Request
     @method_name = self.class::METHOD || value
   end
 
+  def result
+    @result ||= http_request
+  end
+
   def allowed?
     self.result.allow == 1
   end

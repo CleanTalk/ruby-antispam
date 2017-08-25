@@ -44,7 +44,7 @@ describe Cleantalk::CheckMessage do
   end
 
   let :base_parameters do
-    { method_name: "check_message", auth_key: 'test', sender_email: 'test@example.org' }
+    { method_name: "check_message", auth_key: 'test', sender_email: 'test@example.org', message: '<h1>Title</h1><p>Hello World!</p>' }
   end
 
   let :request do
@@ -63,8 +63,9 @@ describe Cleantalk::CheckMessage do
     it 'can pass params definition' do
       expect(request.auth_key).to eql('test')
       expect(request.sender_email).to eql('test@example.org')
-      expect(subject.is_a? Cleantalk::Request).to eql(true)
-      expect(subject.method_name).to eql("check_message")
+      expect(request.is_a? Cleantalk::Request).to eql(true)
+      expect(request.method_name).to eql("check_message")
+      expect(request.message).to eql(base_parameters[:message])
     end
   end
 
