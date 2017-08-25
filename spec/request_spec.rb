@@ -10,7 +10,7 @@ describe Cleantalk::Request do
   end
 
   let :base_parameters do
-    { auth_key: 'test', method_name: "check_message", sender_email: 'test@example.org' }
+    { method_name: "check_message", auth_key: 'test', sender_email: 'test@example.org' }
   end
 
   let :request do

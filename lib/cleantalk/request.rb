@@ -10,8 +10,9 @@ class Cleantalk::Request
                 :submit_time, :js_on, :tz, :feedback, :phone
 
   # Fill params with constructor
-  def initialize(params = nil)
-    unless params.nil?
+  def initialize(params = {})
+    self.method_name = params.delete(:method_name) || self.class::METHOD
+    unless params.empty?
       params.each do |key, value|
         send("#{key}=", value)
       end
@@ -44,6 +45,14 @@ class Cleantalk::Request
     @auth_key || Cleantalk.auth_key
   end
 
+  def method_name= value
+    @method_name = self.class::METHOD || value
+  end
+
+  def allowed?
+    self.result.allow == 1
+  end
+
   private
 
   def valid?
@@ -54,5 +63,6 @@ class Cleantalk::Request
 
   API_URI = URI.parse('https://moderate.cleantalk.org/api2.0').freeze
   API_HEADERS = {'Content-Type' =>'application/json'}.freeze
+  METHOD = nil
   class Cleantalk::Request::BadParameters < StandardError; end
 end

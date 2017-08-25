@@ -24,7 +24,7 @@ describe Cleantalk do
       }
 
       body = JSON.fast_generate({
-        auth_key: "your_key", method_name: "check_newuser"
+        method_name: "check_newuser", auth_key: "your_key"
       })
 
       stub_request(:post, "https://moderate.cleantalk.org:443/api2.0").
@@ -56,7 +56,7 @@ describe Cleantalk do
       }
 
       body = JSON.fast_generate({
-        auth_key: "your_key", method_name: "check_message"
+        method_name: "check_message", auth_key: "your_key"
       })
 
       stub_request(:post, "https://moderate.cleantalk.org:443/api2.0").
