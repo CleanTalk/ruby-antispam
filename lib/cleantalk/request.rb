@@ -11,7 +11,7 @@ class Cleantalk::Request
 
   # Fill params with constructor
   def initialize(params = {})
-    self.method_name = params.delete(:method_name) || self.class::METHOD
+    self.method_name, self.auth_key = params.delete(:method_name) || self.class::METHOD, nil
     unless params.empty?
       params.each do |key, value|
         send("#{key}=", value)

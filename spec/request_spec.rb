@@ -48,10 +48,11 @@ describe Cleantalk::Request do
     end
 
     it "can use global conf auth_key" do
-      response, body = {"ok" => true}, JSON.fast_generate(base_parameters)
+      Cleantalk.auth_key = 'global_test'
 
-      request.auth_key = nil
-      Cleantalk.auth_key = 'test'
+      response, body = {"ok" => true}, JSON.fast_generate(base_parameters.dup.merge({auth_key: Cleantalk.auth_key}))
+      base_parameters.delete(:auth_key)
+      request
 
       stub_request(:post, "https://moderate.cleantalk.org:443/api2.0").
         with(body: body, headers: headers).
