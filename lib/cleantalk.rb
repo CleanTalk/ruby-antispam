@@ -18,6 +18,21 @@ class Cleantalk
     request.method_name = 'check_newuser'
     return request.http_request
   end
+
+  @@auth_key = nil
+
+  def self.auth_key
+    @@auth_key
+  end
+
+  def self.auth_key= value
+    @@auth_key = value
+  end
 end
 
 require 'cleantalk/request'
+require 'cleantalk/check_newuser'
+require 'cleantalk/check_message'
+require 'cleantalk/result'
+require 'cleantalk/check_newuser_result'
+require 'cleantalk/check_message_result'
