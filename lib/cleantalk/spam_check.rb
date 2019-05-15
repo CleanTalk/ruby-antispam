@@ -8,8 +8,9 @@ class Cleantalk::SpamCheck < Cleantalk::Request
     @result ||= Cleantalk::SpamCheckResult.new(spam_check_http_request_without_parse)
   end
 
-  def spammed?
-    self.result.appears == 1
+  def blacklist?(email_or_ip)
+    return nil if self.result[email_or_ip].nil?
+    self.result[email_or_ip]['appears'] == 1
   end
 
   METHOD = 'spam_check'.freeze
