@@ -9,8 +9,8 @@ class Cleantalk::SpamCheck < Cleantalk::Request
   end
 
   def blacklist?(email_or_ip)
-    return nil if self.result[email_or_ip].nil?
-    self.result[email_or_ip]['appears'] == 1
+    return nil if self.result.data.present? && self.result.data[email_or_ip].nil?
+    self.result.data[email_or_ip]['appears'] == 1
   end
 
   METHOD = 'spam_check'.freeze
