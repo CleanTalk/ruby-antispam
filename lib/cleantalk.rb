@@ -33,6 +33,8 @@ end
 require 'cleantalk/request'
 require 'cleantalk/check_newuser'
 require 'cleantalk/check_message'
+require 'cleantalk/spam_check'
 require 'cleantalk/result'
 require 'cleantalk/check_newuser_result'
 require 'cleantalk/check_message_result'
+require 'cleantalk/spam_check_result'
