@@ -55,3 +55,6 @@ result = cleantalk.is_allowed_user(request)    # for registration checking
 # result['allow'] contains our decision: 1 for allowed message, 0 for blocked
 # result['comment'] contains comment for our decision
 ```
+## Requirements
+
+* CleanTalk account https://cleantalk.org/register?product=anti-spam
