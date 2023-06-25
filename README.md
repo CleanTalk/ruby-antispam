@@ -8,6 +8,11 @@ Install via bundler
 
     gem 'cleantalk'
 
+For improve protection include javascript to your layout before </body> tag:
+```html
+<script type="text/javascript" src="https://moderate.cleantalk.org/ct-bot-detector-wrapper.js"></script>
+```
+
 ## Usage
 
 ```ruby
@@ -47,6 +52,9 @@ request.sender_ip       = '127.0.0.1'
 request.js_on           = 1 # you should check for JavaScript by yourself
 request.submit_time     = 11 # you should calculate time for submitting form by youself
 request.sender_info     = {cms_lang: 'en_US'} # here put locale for your language
+
+# In case use js bot detector, add event_token from your form for check frontend data
+# request.event_token     = 'xxx' # fill it with ct_bot_detector_event_token hidden input from your form (auto generate)
 
 cleantalk = Cleantalk.new
 result = cleantalk.is_allowed_message(request) # for message checking

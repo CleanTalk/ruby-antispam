@@ -7,7 +7,7 @@ class Cleantalk::Request
                 :last_error_text, :message, :example, :agent,
                 :stoplist_check, :response_lang, :sender_ip, :sender_email,
                 :sender_nickname, :sender_info, :post_info, :allow_links,
-                :submit_time, :js_on, :tz, :feedback, :phone
+                :submit_time, :js_on, :tz, :feedback, :phone, :event_token
 
   # Fill params with constructor
   def initialize(params = {})
