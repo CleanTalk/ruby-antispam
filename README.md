@@ -22,7 +22,6 @@ require 'cleantalk'
 request = Cleantalk::CheckNewuser.new({ auth_key: 'ur_api_key', sender_email: 'test@example.org' }) # Can initialize with values
 request.sender_ip       = '127.0.0.1' # and also mutate object directly
 request.sender_nickname = 'test nickname'
-request.js_on           = 1 # you should check for JavaScript by yourself
 request.submit_time     = 11 # you should calculate time for submitting form by youself
 
 request.allowed? # => true or false
@@ -32,7 +31,7 @@ request.result   # => <Object Cleantalk::CheckNewuserResult> with all response d
 request = Cleantalk::CheckMessage.new({
   auth_key: 'ur_api_key', sender_email: 'test@example.org',
   sender_ip: '127.0.0.1', sender_nickname: 'test nickname',
-  js_on: 1, submit_time: 11
+  submit_time: 11
 }) # Can initialize with values
 request.message = '<p>Hello World!</p>'  # and also mutate object directly
 
@@ -49,7 +48,6 @@ request.message         = 'test message' # don't use this field for registration
 request.sender_email    = 'stop_email@example.com'
 request.sender_nickname = 'test nickname'
 request.sender_ip       = '127.0.0.1'
-request.js_on           = 1 # you should check for JavaScript by yourself
 request.submit_time     = 11 # you should calculate time for submitting form by youself
 request.sender_info     = {cms_lang: 'en_US'} # here put locale for your language
 
