@@ -1,4 +1,4 @@
-# CleanTalk Anti-Spam for Ruby
+# CleanTalk ruby-recaptcha-antispam: Simple Anti-Spam & Invisible reCAPTCHA for Ruby Apps
 
 Powerful spam protection and reliable spam bot detection for Ruby applications — all in one gem.  
 CleanTalk is a convenient CAPTCHA/reCAPTCHA alternative offering intelligent cloud-based spam protection for forms, comments, and user registrations.  
