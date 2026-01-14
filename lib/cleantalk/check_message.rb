@@ -1,4 +1,6 @@
 class Cleantalk::CheckMessage < Cleantalk::Request
+  attr_accessor :event_token
+
   attr_accessor :message
 
   def result
