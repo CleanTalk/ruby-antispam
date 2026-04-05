@@ -12,6 +12,8 @@ Key features:
 - Easy and seamless integration
 - Enjoy comprehensive spam protection and hassle-free user experience—no CAPTCHA/reCAPTCHA needed.
 
+If you find this project useful, please consider starring ⭐ it on GitHub — it helps us grow and support development!
+
 ## Install
 
 Install via bundler
